@@ -1,6 +1,6 @@
 let requests = [];
 let lastTimeSent = Date.now();
-const requestsPerBatch = 1;
+const requestsPerBatch = 50;
 const maxReuqestsAge = 60000; //in milliseconds
 
 addEventListener('fetch', event => {
