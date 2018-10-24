@@ -12,7 +12,7 @@ addEventListener('fetch', event => {
  * @param {Request} request
  */
 async function handleRequest(event) {
-
+    if (!lastTimeSent) lastTimeSent = Date.now();
     requests.push(getRequestData(event.request));
     if (requests.length >= requestsPerBatch || (Date.now() - lastTimeSent >= maxReuqestsAge)) {
         try {
