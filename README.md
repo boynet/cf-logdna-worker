@@ -1,2 +1,2 @@
 # cf-dnalog-worker
-simple cloudflare worker recipe to send logs into dnalog
+simple cloudflare worker recipe to send logs into [logdna](https://logdna.com/)
