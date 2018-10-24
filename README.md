@@ -7,3 +7,7 @@ change myApp and myHostName into whatever you want, read the logdna [Ingest API]
 
 * requestsPerBatch - how many requests to maximum batch per request
 * maxReuqestsAge - how much time to maximum old requests in the memory before sending it 
+
+## about compiledPass
+
+you should precompile your logdna ingestion key and store it in the compilePass parameters, you can simply type in console `btoa(username+':'+password)` where username is your ingestion key and password keep empty, and put the results into the parameter to save some cpu time(probably)
