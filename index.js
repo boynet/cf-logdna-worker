@@ -29,7 +29,7 @@ function getRequestData(request) {
     let data = {
         'app': 'myApp',
         'meta': {
-            'ua' : request.headers.get('user-agent');
+            'ua' : request.headers.get('user-agent'),
             'referer' : request.headers.get('Referer') || 'empty',
             'ip' : request.headers.get('CF-Connecting-IP'),
             'countryCode' : request.headers.get("cf-ipcountry"),
