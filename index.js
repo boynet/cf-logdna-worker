@@ -33,10 +33,11 @@ function getRequestData(request) {
             'ua': request.headers.get('user-agent'),
             'referer' : request.headers.get('Referer') || 'empty',
             'ip' : request.headers.get('CF-Connecting-IP'),
-            'countryCode' : request.headers.get("cf-ipcountry"),
+            'countryCode' : request.cf.country,
+            'colo': request.cf.colo,
             'url' : request.url,
             'method' : request.method,
-            'x_forwarded_for' : request.headers.get('x_forwarded_for') || "0.0.0",
+            'x_forwarded_for' : request.headers.get('x_forwarded_for') || "0.0.0.0",
             'asn' : (request.cf || {}).asn
         }
     };

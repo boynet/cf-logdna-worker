@@ -22,6 +22,7 @@ I left all the console.log command to better help you debug
 + ip
 + countryCode
 + url
++ colo
 + method
 + x_forwarded_for
 + asn
