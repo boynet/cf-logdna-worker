@@ -17,6 +17,7 @@ I left all the console.log command to better help you debug
 
 ### logged parameters:
 
++ user agent
 + referer
 + ip
 + countryCode
