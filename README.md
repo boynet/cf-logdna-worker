@@ -14,3 +14,13 @@ you should precompile your logdna ingestion key and store it in the compilePass 
 
 
 I left all the console.log command to better help you debug
+
+### logged parameters:
+
++ referer
++ ip
++ countryCode
++ url
++ method
++ x_forwarded_for
++ asn
