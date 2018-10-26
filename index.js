@@ -1,5 +1,5 @@
 let requests = [];
-let lastTimeSent = Date.now();
+let lastTimeSent, workerInception
 const requestsPerBatch = 50;
 const maxRequestsAge = 60000; //in milliseconds
 
@@ -13,6 +13,7 @@ addEventListener('fetch', event => {
  */
 async function handleRequest(event) {
     if (!lastTimeSent) lastTimeSent = Date.now();
+    if (!workerInception) workerInception = Date.now();
     requests.push(getRequestData(event.request));
     if (requests.length >= requestsPerBatch || (Date.now() - lastTimeSent >= maxRequestsAge)) {
         try {
@@ -33,10 +34,12 @@ function getRequestData(request) {
             'ua': request.headers.get('user-agent'),
             'referer' : request.headers.get('Referer') || 'empty',
             'ip' : request.headers.get('CF-Connecting-IP'),
-            'countryCode' : request.headers.get("cf-ipcountry"),
+            'countryCode' : request.cf.country,
+            'colo': request.cf.colo,
+            'workerInception': workerInception,
             'url' : request.url,
             'method' : request.method,
-            'x_forwarded_for' : request.headers.get('x_forwarded_for') || "0.0.0",
+            'x_forwarded_for' : request.headers.get('x_forwarded_for') || "0.0.0.0",
             'asn' : (request.cf || {}).asn
         }
     };
