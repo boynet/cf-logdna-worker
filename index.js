@@ -1,5 +1,5 @@
 let requests = [];
-let lastTimeSent = Date.now();
+let lastTimeSent, workerInception
 const requestsPerBatch = 50;
 const maxRequestsAge = 60000; //in milliseconds
 
@@ -35,6 +35,7 @@ function getRequestData(request) {
             'ip' : request.headers.get('CF-Connecting-IP'),
             'countryCode' : request.cf.country,
             'colo': request.cf.colo,
+            'workerInception': workerInception,
             'url' : request.url,
             'method' : request.method,
             'x_forwarded_for' : request.headers.get('x_forwarded_for') || "0.0.0.0",
