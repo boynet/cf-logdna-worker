@@ -56,15 +56,14 @@ async function postRequests(data) {
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json; charset=UTF-8');
     myHeaders.append('Authorization', 'Basic ' + (compiledPass || btoa(username+':'+password)));
-    requests = [];
-    lastTimeSent = Date.now();
     try {
-        return fetch('https://logs.logdna.com/logs/ingest?tag=worker&hostname='+ hostname +'&now=' + lastTimeSent, {
+        return fetch('https://logs.logdna.com/logs/ingest?tag=worker&hostname='+ hostname, {
             method: 'POST',
             headers: myHeaders,
             body: data
         }).then(function (r) {
-            //console.log(r.status, r.text());
+            lastTimeSent = Date.now();
+            requests = [];
         });
     } catch (err) {
         //console.log(err.stack || err);
