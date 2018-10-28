@@ -1,5 +1,5 @@
 let requests = [];
-let lastTimeSent, workerInception
+let lastTimeSent, workerInception, workerId
 const requestsPerBatch = 50;
 const maxRequestsAge = 60000; //in milliseconds
 
@@ -14,6 +14,7 @@ addEventListener('fetch', event => {
 async function handleRequest(event) {
     if (!lastTimeSent) lastTimeSent = Date.now();
     if (!workerInception) workerInception = Date.now();
+    if (!workerId) workerId = makeid(6);
     requests.push(getRequestData(event.request));
     if (requests.length >= requestsPerBatch || (Date.now() - lastTimeSent >= maxRequestsAge)) {
         try {
@@ -37,6 +38,7 @@ function getRequestData(request) {
             'countryCode' : (request.cf || {}).country,
             'colo': (request.cf || {}).colo,
             'workerInception': workerInception,
+            'workerId': workerId,
             'url' : request.url,
             'method' : request.method,
             'x_forwarded_for' : request.headers.get('x_forwarded_for') || "0.0.0.0",
@@ -68,4 +70,12 @@ async function postRequests(data) {
     } catch (err) {
         //console.log(err.stack || err);
     }
+}
+
+function makeid(lenght) {
+  let text = ''
+  const possible = 'ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789'
+  for (let i = 0; i < lenght ; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
 }
