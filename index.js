@@ -15,7 +15,7 @@ async function handleRequest(event) {
     if (!lastTimeSent) lastTimeSent = Date.now();
     if (!workerInception) workerInception = Date.now();
     if (!workerId) workerId = makeid(6);
-    requests.push(getRequestData(event.request));
+    await requests.push(getRequestData(event.request));
     if (requests.length >= requestsPerBatch || (Date.now() - lastTimeSent >= maxRequestsAge)) {
         try {
             event.waitUntil(postRequests({'lines': requests}))
