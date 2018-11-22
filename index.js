@@ -4,7 +4,8 @@ const requestsPerBatch = 50;
 const maxRequestsAge = 60000; //in milliseconds
 
 addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event))
+    event.passThroughOnException();
+    event.respondWith(handleRequest(event));
 })
 
 /**
