@@ -20,7 +20,7 @@ async function logRequests(event) {
     if (!workerId) workerId = makeid(6);
     const response = await fetch(event.request)
     requestEndTime = Date.now();
-    requests.push(getRequestData(event.request, response));
+    await requests.push(getRequestData(event.request, response));
     return response
 }
 
