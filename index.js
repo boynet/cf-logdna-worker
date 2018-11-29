@@ -28,7 +28,7 @@ async function handleBatch(event) {
     batchIsRunning = true;
     await sleep(10000)
     try {
-        event.waitUntil(postRequests())
+        if (requests.length) event.waitUntil(postRequests())
     } catch (e) {
 
     }
@@ -70,7 +70,6 @@ function getRequestData(request, re) {
 
 async function postRequests() {
     //console.log('posting',data);
-    if (!requests.length) return;
     let data = JSON.stringify({'lines': requests});
     const username = 'My logdna Ingestion key';
     const password = '';
