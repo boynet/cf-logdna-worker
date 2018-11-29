@@ -70,6 +70,7 @@ function getRequestData(request, re) {
 
 async function postRequests() {
     //console.log('posting',data);
+    if (!requests.length) return;
     let data = JSON.stringify({'lines': requests});
     const username = 'My logdna Ingestion key';
     const password = '';
