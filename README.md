@@ -23,9 +23,14 @@ I left all the console.log command to better help you debug
 + url
 + colo
 + workerInception
++ workerId
 + method
 + x_forwarded_for
 + asn
 + status
 + originTime
 + CF-Cache-Status
++ CF-Ray
++ tlsCipher
++ tlsVersion
++ clientTrustScore
