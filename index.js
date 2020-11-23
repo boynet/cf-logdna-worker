@@ -1,5 +1,5 @@
 let requests = [];
-let workerInception, workerId, requestStartTime, requestEndTime;
+let requestStartTime, requestEndTime;
 let batchIsRunning = false;
 const maxRequestsPerBatch = 150;
 
@@ -16,8 +16,6 @@ async function logRequests(event) {
         event.waitUntil(postRequests())
     }
     requestStartTime = Date.now();
-    if (!workerInception) workerInception = Date.now();
-    if (!workerId) workerId = makeid(6);
     const response = await fetch(event.request)
     requestEndTime = Date.now();
     await requests.push(getRequestData(event.request, response));
@@ -52,8 +50,6 @@ function getRequestData(request, re) {
             'ip': request.headers.get('CF-Connecting-IP'),
             'countryCode': (request.cf || {}).country,
             'colo': (request.cf || {}).colo,
-            'workerInception': workerInception,
-            'workerId': workerId,
             'url': request.url,
             'method': request.method,
             'x_forwarded_for': request.headers.get('x_forwarded_for') || "0.0.0.0",
@@ -92,12 +88,4 @@ async function postRequests() {
     } catch (err) {
         //console.log(err.stack || err);
     }
-}
-
-function makeid(lenght) {
-    let text = ''
-    const possible = 'ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789'
-    for (let i = 0; i < lenght; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    return text;
 }
